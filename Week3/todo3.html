@@ -1,0 +1,45 @@
+<!DOCTYPE html><html>
+    <head>  <meta charset="utf-8">  
+        <meta name="viewport" content="width=device-width"> 
+         <title>replit</title>
+           <link href="style.css" rel="stylesheet" type="text/css" />
+           <style>
+             #todo1{
+                background-color: aqua;
+             }
+             .to{
+               color: red;
+             }
+           </style>
+    </head>
+        <body>  
+            <h1 id="todo1">Todo list</h1> 
+            <h4 class="to">1. Take class</h4> 
+            <h4 class="to">2. Go out to eat</h4>  
+            <div>
+                 <input type="text" placeholder="Add todo here"></input>   
+                 <button id="btn" onclick="addTodo()" >Add Todo</button> 
+             </div>  
+                 <script src="script.js"></script>
+        </body>
+        <script>
+            var nm="Prajjwal";
+            //
+            //console.log(inputEl.value); do in browser
+            // document.querySelector("button").innerHTML 
+            function addTodo(){
+                const inputElement=document.querySelector("input");
+                const value=inputElement.value;
+                console.log(value);
+            }
+        </script>
+</html>
+<!-- 
+document.querySelectorAll("h4"); will get all h4 element
+document.querySelector("#todo1") //will grab the id
+
+<h1 id=​"todo1">​Todo list​</h1>​ // will do the same thing
+
+class is better because we dont have to repeat the code but in id we have to give a different ids different
+elements
+-->
