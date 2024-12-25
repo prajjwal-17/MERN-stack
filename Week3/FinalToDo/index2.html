@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="Add Task">
+    <button onclick="addTodo()">Add</button>
+    <button>Delete</button>
+</body>
+
+<script>
+    let ctr=0;
+    function addTodo(){
+        const inputEl=document.querySelector("input");
+        const value=inputEl.value;
+
+        const newDivEl = document.createElement("div");
+        newDivEl.setAttribute("id", ctr);
+         
+        newDivEl.innerHTML = `<div>${value}</div><button onclick="deleteTo(${ctr})">Delete</button>`;
+        document.querySelector("body").appendChild(newDivEl);
+        ctr += 1;// this is done after so that it doesnt delete the element above required element
+        inputEl.value = ""; // Clear input after adding
+
+
+    }
+
+    function deleteTo(index){
+        const element=document.getElementById(index);
+        element.parentNode.removeChild(element);
+    }
+</script>
+</html>

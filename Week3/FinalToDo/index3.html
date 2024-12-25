@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=in, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="Add the task">
+    <button onclick="addTodo()">Add</button>
+</body>
+
+<script>
+    function addTodo(){
+        const value=document.querySelector("input").value;
+        const spanEL=document.createElement("span");
+        const buttonEl=document.createElement("button");
+        spanEL.innerHTML=value;
+        buttonEl.innerHTML="Delete";
+        const divEl=document.createElement("div");
+        divEl.appendChild(spanEL);
+        divEl.appendChild(buttonEl);
+
+
+        // body has div which has two child elements names spanEl and buttonEl
+
+        document.querySelector("body").appendChild(divEl);
+    }
+</script>
+</html>
+<!-- this is a cleaner code because we dont have to write raw html -->

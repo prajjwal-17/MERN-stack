@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=in, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="Add the task">
+    <button onclick="addTodo()">Add</button>
+    <button onclick="deleteLastTodo()">Delete Last todo</button>
+    <button onclick="deleteFirstTodo()">Delete First todo </button>
+    <div id="todos"></div>
+</body>
+
+<script>
+    let todos=[];
+    function addTodo(){
+        todos.push({
+            title:document.querySelector("input").value
+        })
+        render();
+    }
+     
+    function deleteLastTodo(){
+       todos.splice(todos.length-1,1) //removes the last element....delete from,   
+       //(index form where to delete,no. of elements to delete)
+       render();
+    }
+    function deleteFirstTodo(){
+       todos.splice(0,1) //removes the last element....delete from,   
+       //(index form where to delete,no. of elements to delete)
+       render();
+    }
+    function deleteTodo(index){
+        todos.splice(index,1);
+        render();
+    }
+    function createTodoComponent(todo,index){
+        const div=document.createElement("div");
+        const h1=document.createElement("h1");
+        const button=document.createElement("button");
+        button.innerHTML="Delete";
+        button.setAttribute("onclick", `deleteTodo(${index})`);
+        h1.innerHTML=todo.title;
+        div.append(h1)
+        div.append(button)
+        document.querySelector("#todos").appendChild(div);
+        return div;
+    }
+
+
+ //this work is done by react 
+    function render(){
+        document.querySelector("#todos").innerHTML="";// clearing screen before each action and then printing whole
+       for(let i=0;i<todos.length;i++)
+       {
+        const element=createTodoComponent(todos[i],i);
+        document.querySelector("#todos").appendChild(element)
+       }
+    }
+</script>
+</html>
+<!-- 
+state is how the dynamic part of the website looks
+components-how to render state on screen
+Rendering -take the state and render in on the Dom based on components
+-->
+
+
+<!-- 
+doing DOM for a big application is hard and that is why we use state and component
+-->
