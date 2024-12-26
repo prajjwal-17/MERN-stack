@@ -1,0 +1,43 @@
+The format is as follows - `MAJOR.MINOR.PATCH`
+
+- MAJOR -  Major version changes indicate significant updates or breaking changes.
+- MINOR -  Minor version changes signify the addition of new features or improvements in a backward-compatible manner.
+- PATCH - Patch version changes include backward-compatible bug fixes or minor improvements that address issues without adding new features or causing breaking changes.
+
+### Usage in `package.json`
+
+- `“chalk”: “^5.3.0”` - npm will install any version that is compatible with `5.3.0` but less than `6.0.0`. This includes versions like `5.3.1`, `5.4.0`, `5.5.0`, etc.
+- `“chalk”: “5.3.0”` - Will install the exact version
+- `"chalk": "latest"` - Will install the latest version
+
+
+
+packagen-lock file is used to lock a version 
+all developers should have same versions
+
+every promise is a thenable
+every thenable is not a pormise
+
+
+Starting Express server
+
+1. Ensure Node.js is Installed:
+Make sure you have Node.js installed on your computer. If not, you can download it from the official website.
+2. Save Your Code:
+Save your code in a file, e.g., app.js.
+3. Install Express:
+In the directory where you saved app.js, open a terminal or command prompt and run the following command to install Express:
+bash
+Copy code
+npm install express
+4. Run the Server:
+Start your Express server by running the following command in the terminal or command prompt from the same directory:
+bash
+Copy code
+node app.js
+5. Access the Application in a Browser:
+Open your web browser and go to the following URL:
+arduino
+Copy code
+http://localhost:3000?n=10
+Replace 10 with any number you want to use as the input for n. The browser will display the sum of all integers from 0 to n.
