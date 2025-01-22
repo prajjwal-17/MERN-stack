@@ -1,0 +1,20 @@
+
+---->
+
+Signup
+FE------>BE------->password to be hashed before reaching db---->DB
+
+Signin
+re run the hash and compare with DB
+
+but if 2 users have same the same password then they have the same hash which is a security vulnerability
+
+so we do SALTING--adding a random string after the password and create a hash with it and also store the salt with it
+                  now we would have 2 differrent hash since the string was random
+                
+
+                 so during sign in we would get the salt from db and add it to password and check if the hash is same
+
+
+zod is required because we expect a string but the user can send anything like an object empty string etc
+so we should do input validation
