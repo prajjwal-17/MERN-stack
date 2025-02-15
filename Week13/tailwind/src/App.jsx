@@ -4,9 +4,9 @@ function App(){
   // bg-red-500 - unprefixed utility   unprefixed is default  implies mobile-> tablet > desktop 
   //  sm:bg-blue-500 - prefixed  -utility    prefixed utility take effect on specific break point and above      
   return <div className="grid grid-cols-12 ">
-       <div className="col-span-12  sm:col-span-5 bg-[#FF0000]">Hey1</div>
-       <div className="col-span-12  sm:col-span-5 bg-green-300">Hey2</div>
-       <div className="col-span-12  sm:col-span-2 bg-blue-300">Hey3</div>
+       <div className="col-span-12  sm:col-span-5 bg-[#FF0000] p-5 rounded-full">Hey1</div>
+       <div className="col-span-12  sm:col-span-5 bg-green-300 text-red-600 text-8xl">Hey2</div>
+       <div className="col-span-12  sm:col-span-2 bg-blue-300 rounded-xl">Hey3</div>
 
   </div>
  }
