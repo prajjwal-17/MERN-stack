@@ -41,7 +41,7 @@ export const Otp2 = () => {
                         ref={inputRefs.current[index]}
                         value={val}
                         onKeyDown={(e) => {
-                            if (e.key === "Backspace") handleBackspace(index);
+                            if (e.key === "Backspace"){ handleBackspace(index);setDisabled(true);}
                         }}
                         onChange={(e) => handleChange(index, e.target.value)}
                         type="text"

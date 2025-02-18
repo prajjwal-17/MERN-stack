@@ -1,5 +1,3 @@
-import { Button } from "./components/Buttons";
-import { Input } from "./components/Input";
 import { Otp2 } from "./components/Otp2";
 
 function App(){
