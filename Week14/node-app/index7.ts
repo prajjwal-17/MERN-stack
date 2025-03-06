@@ -1,9 +1,9 @@
 console.log("Hey there");
-function del(fn:()=>void){
+function del2(fn:()=>void){
     setTimeout(fn,5000);
 }
 
-del(()=>{
+del2(()=>{
     console.log("5 seconds have passed");
 })
 //better way
