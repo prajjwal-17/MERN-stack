@@ -6,4 +6,4 @@ function del2(fn:()=>void){
 del2(()=>{
     console.log("5 seconds have passed");
 })
-//better way
+//better way 
