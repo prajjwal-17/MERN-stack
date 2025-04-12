@@ -1,1 +1,1 @@
-{"root":["./src/enums.ts","./src/enums2.ts","./src/generics.ts","./src/generics2.ts"],"version":"5.8.3"}
+{"root":["./src/excludeevent.ts","./src/partial.ts","./src/readon;y.ts","./src/record.ts","./src/enums.ts","./src/enums2.ts","./src/generics.ts","./src/generics2.ts","./src/map.ts","./src/pick.ts","./src/zodtypes.ts"],"errors":true,"version":"5.8.3"}
