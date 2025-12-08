@@ -1,19 +1,17 @@
-import { WebSocketServer } from 'ws';
+// ping / pong  or echo application
 
-const wss = new WebSocketServer({ port : 8080});
-console.log("Hey there")
+import { WebSocketServer, WebSocket } from "ws";
 
-//event
-wss.on("connection" , function(socket){
-    console.log("user connected");
-    setInterval(()=>{
-        socket.send("Current price of Solana is " + Math.random()*100);
-    },500)
+const wss=new WebSocketServer({port : 8080});
+
+wss.on("connection", function(socket){
+    console.log("user connected")
 
     socket.on("message",(e)=>{
-        console.log(e.toString())
+        console.log(e.toString());
+        console.log(e.toString()==="ping");
+        if(e.toString()=="ping"){
+            socket.send("pong")
+        }
     })
-// for a message from postman we send we get <Buffer 77 68 61 74 20 69 73 20 73 6f 6c 61 6e 61 20 70 72 69 63 65> on logs
-// to get a proper message we do to string
-    
 })

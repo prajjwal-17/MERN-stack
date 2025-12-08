@@ -1,0 +1,4 @@
+first setup by installing ts
+change tsconfig for outdir and rootdir and dist,src folder
+change packagejson to type : module or whatever
+add tsc -b for dev script 
