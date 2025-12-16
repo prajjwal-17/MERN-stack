@@ -1,3 +1,27 @@
+// CREATE TABLE users (
+// id SERIAL PRIMARY KEY ,
+// username VARCHAR(50) UNIQUE NOT NULL ,
+// email VARCHAR(255) UNIQUE NOT NULL ,
+// password VARCHAR(255) NOT NULL,
+// created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+// );
+
+// CREATE TABLE addresses(
+//  id SERIAL PRIMARY KEY ,
+//  user_id INTEGER NOT NULL ,
+//  city VARCHAR(100) NOT NULL ,
+//  country VARCHAR(100) NOT NULL ,
+//  street VARCHAR(255) NOT NULL ,
+//  pincode VARCHAR(20) ,
+//  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP ,
+//  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE 
+// );
+
+// setup queries on Delete Cascade means if something is deleted in users its related will be deleted in other tables as well
+
+// INSERT INTO addresses (user_id, city, country, street, pincode)
+// VALUES (1, 'New York', 'USA', '123 Broadway St', '10001');
+
 import express from "express";
 import type { Request, Response } from "express";
 
@@ -11,7 +35,7 @@ const pgClient = new Client({
   password: "randomPassword",
   host: "localhost",
   port: 5432,
-  database: "mydb",
+  database: "mydb2",
   ssl: false
 });
 
@@ -19,37 +43,23 @@ pgClient.connect();
 
 app.post("/signup", async (req: Request, res: Response) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password , city ,country , street , pincode } = req.body;
 
-  if (!username || !email || !password) {
+  if (!username || !email || !password || !city || !country || !street || !pincode) {
     return res.status(400).json({ message: "Missing fields" });
   }
-// const insertQuery = `Insert INTO users (username , passwor, email) VALUES ('${username}' , '${email}' , '{password}')`
-// if in password the user enters " ''); DELETE FROM users; " this will treat the query  as =>
-// INSERT INTO users (username, email, password) VALUES (wqdqwdwd, wqdqwfqfqw,  ''); DELETE FROM users;)
-// so we will have an insert query and a delete query which is a security vulnerability
-// ⚠️ NEVER build SQL queries using string interpolation.
-// Example of a vulnerable query:
-//
-// INSERT INTO users (username, email, password)
-// VALUES ('${username}', '${email}', '${password}');
-//
-// If an attacker sends:
-// password = "'); DELETE FROM users; --"
-//
-// The database will execute TWO statements:
-// 1) INSERT ...
-// 2) DELETE FROM users
-//
-// This is called SQL Injection.
-
-  await pgClient.query(
-    "INSERT INTO users (username, email, password) VALUES ($1, $2, $3)",
+  
+  const insertQuery=`INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id`;
+  const response = await pgClient.query(
+    insertQuery
+    ,
     [username, email, password] 
-  ); // this array format [username , email password will prevent sql injection]
-  // ✅ Use parameterized queries.
-// The $1, $2, $3 placeholders ensure user input is treated as DATA,
-// not executable SQL, completely preventing SQL injection.
+  ); 
+  const userID=response.rows[0].id;
+  
+  const addressInsertQuery = `INSERT INTO addresses (user_id, city, country, street, pincode) VALUES ($1, $2, $3, $4, $5);`
+
+  const addressInsertResponse = await pgClient.query(addressInsertQuery,[userID,city ,country,street,pincode])
 
 
   res.json({
