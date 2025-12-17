@@ -1,27 +1,12 @@
-// CREATE TABLE users (
-// id SERIAL PRIMARY KEY ,
-// username VARCHAR(50) UNIQUE NOT NULL ,
-// email VARCHAR(255) UNIQUE NOT NULL ,
-// password VARCHAR(255) NOT NULL,
-// created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
-// );
+// BEGIN; -- Start transaction
 
-// CREATE TABLE addresses(
-//  id SERIAL PRIMARY KEY ,
-//  user_id INTEGER NOT NULL ,
-//  city VARCHAR(100) NOT NULL ,
-//  country VARCHAR(100) NOT NULL ,
-//  street VARCHAR(255) NOT NULL ,
-//  pincode VARCHAR(20) ,
-//  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP ,
-//  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE 
-// );
-
-// setup queries on Delete Cascade means if something is deleted in users its related will be deleted in other tables as well
+// INSERT INTO users (username, email, password)
+// VALUES ('john_doe', 'john_doe1@example.com', 'securepassword123');
 
 // INSERT INTO addresses (user_id, city, country, street, pincode)
-// VALUES (1, 'New York', 'USA', '123 Broadway St', '10001');
+// VALUES (currval('users_id_seq'), 'New York', 'USA', '123 Broadway St', '10001');
 
+// COMMIT;
 import express from "express";
 import type { Request, Response } from "express";
 
@@ -50,17 +35,17 @@ app.post("/signup", async (req: Request, res: Response) => {
   }
   
   const insertQuery=`INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING id`;
-  const response = await pgClient.query(
-    insertQuery
-    ,
-    [username, email, password] 
-  ); 
-  const userID=response.rows[0].id;
-  
   const addressInsertQuery = `INSERT INTO addresses (user_id, city, country, street, pincode) VALUES ($1, $2, $3, $4, $5);`
-
+  
+  await pgClient.query("BEGIN;"); // transaction begins
+  
+  const response = await pgClient.query(insertQuery,[username, email, password] ); 
+  const userID=response.rows[0].id;
+  await new Promise(x=>setTimeout(x,100*1000)); // to test if it works or not .. first send req via ppostman then creash backend
   const addressInsertResponse = await pgClient.query(addressInsertQuery,[userID,city ,country,street,pincode])
+  
 
+  await pgClient.query("COMMIT;"); // transaction end
 
   res.json({
     message: "You have signed up"
