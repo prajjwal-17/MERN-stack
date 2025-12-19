@@ -12,7 +12,14 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "prisma": "^7.2.0",
+    "@prisma/client": "^6.7.0",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "prisma": "^6.7.0"
+  },
+  "engines": {
+    "node": "22.20.0"
   }
 }
