@@ -15,6 +15,7 @@ model User {
   password String
   age      Int
   city     String
+  todos    Todo[] // created a 1 to many relations as 1 user can have multiple todos but 1 todo will have a single user
 }
 // after creating this we run the command npx prisma migrate dev
 
@@ -24,4 +25,5 @@ model Todo{
   description     String
   done            Boolean
   userId          Int
+  user            User @relation(fields: [userId], references: [id])
 }
