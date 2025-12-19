@@ -13,4 +13,14 @@ model User {
   username String @unique
   password String
   age      Int
+  city     String
+}
+// after creating this we run the command npx prisma migrate dev
+
+model Todo{
+  id              Int @default(autoincrement()) @id
+  title           String
+  description     String
+  done            Boolean
+  userId          Int
 }
