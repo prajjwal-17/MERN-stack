@@ -27,7 +27,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="border-b p-4 bg-gray-700">Navbar(will be on all pages)</div> 
+        {/* this will be on all pages */}
+        {children} 
+        {/* all children are wrapped inside html    */}
       </body>
     </html>
   );

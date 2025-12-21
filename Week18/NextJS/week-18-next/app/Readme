@@ -1,0 +1,51 @@
+# Next.js Layout — Quick Recall
+
+## What is a layout?
+- A **layout** is a **persistent UI wrapper** for routes
+- It wraps pages and renders them via `children`
+- Layouts **stay mounted** while navigating between pages
+
+```tsx
+export default function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <>{children}</>;
+}
+
+Why layouts exist
+
+Avoid repeating UI (navbar, sidebar, footer)
+
+Preserve state across route changes
+
+Improve performance (no remounts)
+
+Layout vs Page
+
+Layout → structure (persistent)
+
+Page → content (changes per route)
+
+Nested layouts
+
+Each folder can have its own layout.tsx
+
+Inner layouts wrap only their route segment
+
+Root layout
+ └── Dashboard layout
+     └── Page
+
+Rules to remember
+
+Root layout must return <html> and <body>
+
+Layouts are Server Components by default
+
+Use layouts only for shared, stable UI
+
+One-line memory hook
+
+Layouts define structure; pages define content.
