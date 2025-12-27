@@ -1,23 +1,34 @@
-import Image from "next/image";
-import axios from "axios";
+import Link from "next/link";
 
-
-export default async function Home() {
-  const response = await axios.get("http://localhost:3000/api/v1/user/details")
-  // const response = await axios.get("https://week-13-offline.kirattechnologies.workers.dev/api/v1/user/details")
-  const data = response.data;
-  console.log("Request Send out") // this log comes on server's log not on browsers log which shows the firsrt three lines run on server and only html is sent to browser
-   return (
-    <div className="flex flex-col justify-center h-screen">
-        <div className="flex justify-center">
-            <div className="border p-8 rounded">
-                <div>
-                    Name: {data?.name}
-                </div>
-                
-                {data?.email}
-            </div>
+export default function Home() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-sm rounded-xl bg-white p-6 shadow-2xl">
+        
+        <div className="text-center text-xl font-semibold text-gray-800 ">
+          Todo Application
         </div>
+
+        <div className="mt-6 flex gap-4">
+          
+          <Link
+            href="/signin"
+            className="flex-1 rounded-md border border-gray-300 px-4 py-2 text-center text-gray-700 
+                       hover:bg-gray-100 transition shadow-2xl"
+          >
+            Sign In
+          </Link>
+
+          <Link
+            href="/signup"
+            className="flex-1 rounded-md bg-blue-600 px-4 py-2 text-center text-white 
+                       hover:bg-blue-700 transition shadow-2xl"
+          >
+            Sign Up
+          </Link>
+
+        </div>
+      </div>
     </div>
   );
 }
