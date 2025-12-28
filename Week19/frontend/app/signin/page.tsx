@@ -1,30 +1,40 @@
-"use client"
+"use client";
+
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { Eye,EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function SignIn() {
-      const [username, setUsername] = useState("");
-      const [password, setPassword] = useState("");
-      const [hidden, setHidden] = useState(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [hidden, setHidden] = useState(true);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-sm rounded-xl bg-white p-6 shadow-md">
-        
         <h1 className="text-center text-xl font-semibold text-gray-800">
           Sign In
         </h1>
 
-        <form className="mt-6 space-y-4  text-gray-900">
+        <form
+          className="mt-6 space-y-4 text-gray-900"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            await axios.post("http://localhost:3000/api/v1/signin", {
+              username,
+              password,
+            });
+          }}
+        >
           <input
             type="email"
             placeholder="Email"
-            className="w-full  rounded-md border border-gray-300 px-3 py-2
+            onChange={(e) => setUsername(e.target.value)}
+            className="w-full rounded-md border border-gray-300 px-3 py-2
                        focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          {/* Password + eye */}
           <div className="relative">
             <input
               type={hidden ? "password" : "text"}
@@ -44,20 +54,13 @@ export default function SignIn() {
             </button>
           </div>
 
-           <button
-            onClick={() => {
-              axios.post("http://localhost:3000/api/v1/signup", {
-                username,
-                password,
-              });
-            }}
+          <button
             type="submit"
             className="w-full rounded-md bg-blue-600 py-2 text-white
                        hover:bg-blue-700 transition-colors"
           >
-            Sign Up
+            Sign In
           </button>
-
         </form>
 
         <div className="mt-4 text-center text-sm text-gray-600">

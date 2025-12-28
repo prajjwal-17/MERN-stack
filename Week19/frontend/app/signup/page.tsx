@@ -18,7 +18,17 @@ export default function SignUp() {
           Create Account
         </h1>
 
-        <form className="mt-6 space-y-4 text-gray-900">
+        <form
+          className="mt-6 space-y-4 text-gray-900"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            await axios.post("http://localhost:3000/api/v1/signup", {
+              username,
+              name,
+              password,
+            });
+          }}
+        >
           <input
             type="email"
             placeholder="Username"
@@ -35,7 +45,6 @@ export default function SignUp() {
                        focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          {/* Password + eye */}
           <div className="relative">
             <input
               type={hidden ? "password" : "text"}
@@ -56,13 +65,6 @@ export default function SignUp() {
           </div>
 
           <button
-            onClick={() => {
-              axios.post("http://localhost:3000/api/v1/signup", {
-                username,
-                name,
-                password,
-              });
-            }}
             type="submit"
             className="w-full rounded-md bg-blue-600 py-2 text-white
                        hover:bg-blue-700 transition-colors"
