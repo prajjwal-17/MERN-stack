@@ -4,12 +4,14 @@ import { useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import { Eye, EyeOff } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function SignUp() {
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [hidden, setHidden] = useState(true);
+  const router = useRouter();
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -22,11 +24,14 @@ export default function SignUp() {
           className="mt-6 space-y-4 text-gray-900"
           onSubmit={async (e) => {
             e.preventDefault();
-            await axios.post("http://localhost:3000/api/v1/signup", {
+            const res = await axios.post("http://localhost:3000/api/v1/signup", {
               username,
               name,
               password,
             });
+            if (res.status === 200) {
+            router.push("/signin");
+           }
           }}
         >
           <input
