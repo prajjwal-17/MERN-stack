@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+// import { PrismaClient } from "@prisma/client"; // not needed due to singleton prisma client in lib/db.ts
+import prisma from "@/app/lib/db";
 
-const prismaClient = new PrismaClient();
+// const prismaClient = new PrismaClient(); // not needed due to singleton prisma client in lib/db.ts
 
 export async function POST(req : NextRequest){
 
@@ -11,7 +12,7 @@ export async function POST(req : NextRequest){
 // Prisma lowercases the model name when generating the client
 // model User → prisma.user
 
-    await prismaClient.user.create({
+    await prisma.user.create({
         data : {
             // data: is a Prisma API keyword
             username : data.username ,
@@ -26,7 +27,7 @@ export async function POST(req : NextRequest){
 }
 
 export async function GET(req : NextRequest){
-    const user = await prismaClient.user.findFirst();//Fetches the first row from the User table
+    const user = await prisma.user.findFirst();//Fetches the first row from the User table
 
     return NextResponse.json({
         user 
